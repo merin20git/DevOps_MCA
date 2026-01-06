@@ -1,19 +1,14 @@
 pipeline {
     agent any
 
-    tools {
-        python 'Python313'
-    }
-
     stages {
         stage('Setup Python Environment') {
             steps {
                 bat '''
                 python --version
                 python -m venv venv
-                call venv\\Scripts\\activate
-                python -m pip install --upgrade pip
-                pip install -r requirements.txt
+                venv\\Scripts\\python -m pip install --upgrade pip
+                venv\\Scripts\\pip install -r requirements.txt
                 '''
             }
         }
@@ -21,8 +16,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 bat '''
-                call venv\\Scripts\\activate
-                pytest
+                venv\\Scripts\\pytest
                 '''
             }
         }
