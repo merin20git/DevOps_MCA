@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    
+    tools {
+        nodejs "node"
+    }
+
+    stages {
+
+        stage('Git Checkout & Show Tree') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/KARTIKNAIK18/Demo-CICD.git'
+
+                bat 'dir'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'npm test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                bat 'npm start'
+            }
+        }
+    }
+}
