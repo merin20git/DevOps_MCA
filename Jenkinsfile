@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    environment {
+        // Use ";" as a separator on Windows, ":" on Linux/macOS
+        PATH = "C:\Users\Merin\AppData\Local\Programs\Python\Python313\python.exe;$PATH"
+    }
     stages {
         stage('Setup Python Environment') {
             steps {
